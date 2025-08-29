@@ -68,10 +68,11 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
     },
     server: {
       port: 3000,
       open: true,
     },
+    base: process.env.NODE_ENV === 'production' ? '/animated-sticker-homescreen/' : '/',
   });
