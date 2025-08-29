@@ -74,5 +74,5 @@
       port: 3000,
       open: true,
     },
-    base: process.env.NODE_ENV === 'production' ? '/animated-sticker-homescreen/' : '/',
+    base: process.env.NODE_ENV === 'production' ? '/blocked/' : '/',
   });
