@@ -85,7 +85,7 @@ export default function FullTransitionFlow({
           width: '1920px', 
           height: '1080px', 
           overflow: 'hidden',
-          backgroundColor: '#FF00FF',
+          backgroundColor: 'rgba(255, 231, 224, 1)',
           transform: 'none'
         }}
       >
@@ -136,12 +136,12 @@ export default function FullTransitionFlow({
 
   return (
     <div 
-      style={{ 
-        position: 'relative', 
+      style={{
+        position: 'relative',
         width: '1920px', 
         height: '1080px', 
         overflow: 'hidden',
-        backgroundColor: '#FF00FF',
+        backgroundColor: 'rgba(255, 231, 224, 1)',
         transform: 'none'
       }}
       onDragOver={currentScreen === 'upload' ? handleDragOver : undefined}
@@ -166,7 +166,7 @@ export default function FullTransitionFlow({
               top: `${uploadCardTop}px`,
               width: `${uploadCardWidth}px`,
               height: `${uploadCardHeight}px`,
-              backgroundColor: '#FF0000',
+              backgroundColor: '#DD500B',
               borderRadius: '13px',
               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
               zIndex: 100
@@ -202,7 +202,17 @@ export default function FullTransitionFlow({
               }}
               data-name="Upload Shot Title"
             >
-              <p style={{ margin: 0, lineHeight: 'normal' }}>UPLOAD SHOT</p>
+              <p style={{ 
+                margin: 0, 
+                lineHeight: 'normal',
+                color: '#FFE7E0',
+                textAlign: 'center',
+                fontFamily: 'Akira Expanded',
+                fontSize: '27px',
+                fontStyle: 'normal',
+                fontWeight: 800,
+                letterSpacing: '2.7px'
+              }}>UPLOAD SHOT</p>
             </div>
 
             <motion.div
@@ -212,13 +222,13 @@ export default function FullTransitionFlow({
                 top: '112px',
                 width: '442px',
                 height: '224px',
-                backgroundColor: isDragActive ? '#a2d8a4' : '#FF00FF',
+                backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
                 borderRadius: '7px',
                 cursor: 'pointer',
                 zIndex: 2
               }}
               animate={{
-                backgroundColor: isDragActive ? '#a2d8a4' : '#FF00FF'
+                backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)'
               }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               data-name="Upload Drop Area"
@@ -226,14 +236,14 @@ export default function FullTransitionFlow({
               <motion.div 
                 style={{
                   position: 'absolute',
-                  border: isDragActive ? '3px dashed #a2d8a4' : '3px solid #FF00FF',
+                  border: isDragActive ? '3px dashed #a2d8a4' : '3px solid rgba(255, 231, 224, 1)',
                   borderRadius: '10px',
                   inset: '-3px',
                   pointerEvents: 'none',
                   boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)'
                 }}
                 animate={{
-                  borderColor: isDragActive ? '#a2d8a4' : '#FF00FF',
+                  borderColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
                   borderStyle: isDragActive ? 'dashed' : 'solid'
                 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -275,11 +285,44 @@ export default function FullTransitionFlow({
                 data-name="Drag Drop Text"
               >
                 {isDragActive ? (
-                  <p style={{ margin: 0 }}>DROP EM HERE</p>
+                  <p style={{ 
+                    margin: 0,
+                    color: '#1E1E1E',
+                    textAlign: 'center',
+                    WebkitTextStrokeWidth: '0.3px',
+                    WebkitTextStrokeColor: '#1E1E1E',
+                    fontFamily: 'Chivo, sans-serif',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: 'normal'
+                  }}>DROP EM HERE</p>
                 ) : (
                   <>
-                    <p style={{ margin: 0 }}>DRAG & DROP</p>
-                    <p style={{ margin: 0 }}>TO UPLOAD</p>
+                    <p style={{ 
+                      margin: 0,
+                      color: '#1E1E1E',
+                      textAlign: 'center',
+                      WebkitTextStrokeWidth: '0.3px',
+                      WebkitTextStrokeColor: '#1E1E1E',
+                      fontFamily: 'Chivo, sans-serif',
+                      fontSize: '16px',
+                      fontStyle: 'normal',
+                      fontWeight: 400,
+                      lineHeight: 'normal'
+                    }}>DRAG & DROP</p>
+                    <p style={{ 
+                      margin: 0,
+                      color: '#1E1E1E',
+                      textAlign: 'center',
+                      WebkitTextStrokeWidth: '0.3px',
+                      WebkitTextStrokeColor: '#1E1E1E',
+                      fontFamily: 'Chivo, sans-serif',
+                      fontSize: '16px',
+                      fontStyle: 'normal',
+                      fontWeight: 400,
+                      lineHeight: 'normal'
+                    }}>TO UPLOAD</p>
                   </>
                 )}
               </div>
@@ -294,7 +337,7 @@ export default function FullTransitionFlow({
               top: `${customizeCardTop}px`,
               width: `${customizeCardWidth}px`,
               height: `${customizeCardHeight}px`,
-              backgroundColor: '#FF0000',
+              backgroundColor: '#DD500B',
               borderRadius: '13px',
               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
               zIndex: 100
@@ -318,14 +361,15 @@ export default function FullTransitionFlow({
                 top: '29px',
                 width: '444px',
                 height: '49px',
-                fontFamily: 'Michroma, sans-serif',
+                fontFamily: 'Akira Expanded, sans-serif',
                 fontSize: '35px',
-                color: 'white',
+                color: '#FFE7E0',
                 textAlign: 'center',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                lineHeight: 0,
+                lineHeight: 'normal',
+                fontWeight: 800,
                 zIndex: 1
               }}
               data-name="Customise Title"
@@ -340,14 +384,15 @@ export default function FullTransitionFlow({
                 top: '120px',
                 width: '453px',
                 height: '154px',
-                fontFamily: 'Michroma, sans-serif',
-                fontSize: '20px',
-                color: 'white',
+                fontFamily: 'Chivo, sans-serif',
+                fontSize: '32px',
+                color: '#FFE7E0',
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 lineHeight: 'normal',
+                fontWeight: 400,
                 zIndex: 1
               }}
               data-name="Instructions Text"
@@ -364,7 +409,8 @@ export default function FullTransitionFlow({
                 top: '320px',
                 width: '397px',
                 height: '43px',
-                backgroundColor: '#FF00FF',
+                backgroundColor: '#F0F',
+                border: '1px solid #F0F',
                 borderRadius: '15px',
                 cursor: 'pointer',
                 display: 'flex',
@@ -376,10 +422,12 @@ export default function FullTransitionFlow({
               data-name="Ready Button"
             >
               <div style={{
-                fontFamily: 'Michroma, sans-serif',
-                fontSize: '12px',
-                color: 'white',
+                fontFamily: 'Akira Expanded, sans-serif',
+                fontSize: '14px',
+                color: '#FFE7E0',
                 textAlign: 'center',
+                fontStyle: 'normal',
+                fontWeight: 800,
                 lineHeight: 'normal'
               }}>
                 <p style={{ margin: 0, lineHeight: 'normal' }}>I'M READY</p>

@@ -8,7 +8,6 @@ import imgGroup121 from "figma:asset/9318e762097bdb0a643cc925f5de9ae11fa1c92c.pn
 import imgGroup32 from "figma:asset/fead91a18d276467d72427f35a1a6aa2c9baa7c7.png";
 import imgImage6 from "figma:asset/7e3670b5570ecbbdbf2fd131bb36b9e26e07f87d.png";
 import imgImage12 from "figma:asset/feed20764d16a1b14475aeac38e5b14342ea170e.png";
-import imgImage7 from "figma:asset/3881de7c145f96fda594ebbc2a8697ad761f0e13.png";
 import imgImage1 from "figma:asset/59db2a219c37ee84a5118dcb99d24a4b13204a11.png";
 import imgGroup161 from "figma:asset/d64d9cb8d649e238ff21365988ab6e1801c4c985.png";
 import imgWatermarked3540C0595Eda400282001B643Cc1E2E31 from "figma:asset/596c4256123cb22cf58eabfcd8ac24e1c97ad788.png";
@@ -37,7 +36,7 @@ export default function CustomizeToFinalTransition({
         width: '1920px', 
         height: '1080px', 
         overflow: 'hidden',
-        backgroundColor: '#FF00FF',
+        backgroundColor: 'rgba(255, 231, 224, 1)',
         transform: 'none'
       }}
     >
@@ -49,7 +48,6 @@ export default function CustomizeToFinalTransition({
           top: '105px',
           width: '622px',
           height: '95px',
-          backgroundImage: `url('${imgImage7}')`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -342,7 +340,7 @@ export default function CustomizeToFinalTransition({
               top: `${customizeCardTop}px`,
               width: `${customizeCardWidth}px`,
               height: `${customizeCardHeight}px`,
-              backgroundColor: '#FF0000',
+              backgroundColor: '#DD500B',
               borderRadius: '13px',
               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
               zIndex: 100
@@ -365,14 +363,15 @@ export default function CustomizeToFinalTransition({
                 top: '29px',
                 width: '444px',
                 height: '49px',
-                fontFamily: 'Michroma, sans-serif',
+                fontFamily: 'Akira Expanded, sans-serif',
                 fontSize: '35px',
-                color: 'white',
+                color: '#FFE7E0',
                 textAlign: 'center',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                lineHeight: 0,
+                lineHeight: 'normal',
+                fontWeight: 800,
                 zIndex: 1
               }}
               data-name="Customise Title"
@@ -387,14 +386,15 @@ export default function CustomizeToFinalTransition({
                 top: '120px',
                 width: '453px',
                 height: '154px',
-                fontFamily: 'Michroma, sans-serif',
-                fontSize: '20px',
-                color: 'white',
+                fontFamily: 'Chivo, sans-serif',
+                fontSize: '32px',
+                color: '#FFE7E0',
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 lineHeight: 'normal',
+                fontWeight: 400,
                 zIndex: 1
               }}
               data-name="Instructions Text"
@@ -411,7 +411,8 @@ export default function CustomizeToFinalTransition({
                 top: '320px',
                 width: '397px',
                 height: '43px',
-                backgroundColor: '#FF00FF',
+                backgroundColor: '#F0F',
+                border: '1px solid #F0F',
                 borderRadius: '15px',
                 cursor: 'pointer',
                 display: 'flex',
@@ -423,10 +424,12 @@ export default function CustomizeToFinalTransition({
               data-name="Ready Button"
             >
               <div style={{
-                fontFamily: 'Michroma, sans-serif',
-                fontSize: '12px',
-                color: 'white',
+                fontFamily: 'Akira Expanded, sans-serif',
+                fontSize: '14px',
+                color: '#FFE7E0',
                 textAlign: 'center',
+                fontStyle: 'normal',
+                fontWeight: 800,
                 lineHeight: 'normal'
               }}>
                 <p style={{ margin: 0, lineHeight: 'normal' }}>I'M READY</p>

@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
-import imgImage18 from "figma:asset/1ffd47cb9d4a47e07f8aa50dea5f36f79c34eee4.png";
+import imgImage18 from "../assets/Layer_1.png";
+import imgButton from "../assets/button1.png";
 import imgGroup21 from "figma:asset/d85c3eb857456ec96e23a929daffcd28374729dd.png";
 import imgImage2 from "figma:asset/aba441c6984ddd88966846b48f2d123550cf1b3b.png";
 import imgGroup31 from "figma:asset/fead91a18d276467d72427f35a1a6aa2c9baa7c7.png";
-import imgImage7 from "figma:asset/3881de7c145f96fda594ebbc2a8697ad761f0e13.png";
 
 const CANVAS = { w: 1920, h: 1080 };
 
@@ -16,38 +16,9 @@ export default function AnimatedHomescreen() {
         height: CANVAS.h, 
         overflow: 'hidden', 
         transform: 'none',
-        backgroundColor: '#FF00FF'
+        backgroundColor: 'rgba(255, 231, 224, 1)'
       }}
     >
-      {/* Header - COCKBLOCK ALWAYS USE PROTECTION */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          left: 649,
-          top: 105,
-          width: 622,
-          height: 95,
-          backgroundImage: `url('${imgImage7}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 20
-        }}
-        initial={{ y: -150, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 120, 
-          damping: 12, 
-          delay: 0.1,
-          duration: 1.2
-        }}
-        whileHover={{ 
-          scale: 1.06,
-          filter: 'drop-shadow(0 15px 30px rgba(255, 255, 255, 0.2))',
-          transition: { type: "spring", stiffness: 300, damping: 10 }
-        }}
-      />
 
       {/* Red COCKBLOCK sticker - main centerpiece */}
       <motion.div 
@@ -250,7 +221,7 @@ export default function AnimatedHomescreen() {
         </motion.div>
       </motion.div>
 
-      {/* CTA - CLICK ANYWHERE TO BEGIN */}
+      {/* CTA Button */}
       <motion.div
         style={{
           position: 'absolute',
@@ -258,13 +229,6 @@ export default function AnimatedHomescreen() {
           top: 890,
           width: 676,
           height: 49,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: 'Michroma, sans-serif',
-          fontSize: '20px',
-          color: 'white',
-          textAlign: 'center',
           zIndex: 60
         }}
         initial={{ y: 100, opacity: 0 }}
@@ -283,8 +247,15 @@ export default function AnimatedHomescreen() {
           transition: { type: "spring", stiffness: 400, damping: 10 }
         }}
       >
-        <motion.p 
-          style={{ margin: 0, lineHeight: 'normal' }}
+        <motion.div 
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            backgroundImage: `url('${imgButton}')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
           animate={{ 
             scale: [1, 1.02, 1],
             opacity: [1, 0.85, 1]
@@ -294,9 +265,7 @@ export default function AnimatedHomescreen() {
             duration: 2.5, 
             ease: "easeInOut" 
           }}
-        >
-          CLICK ANYWHER TO BEGIN
-        </motion.p>
+        />
       </motion.div>
     </div>
   );

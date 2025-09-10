@@ -357,7 +357,7 @@ export default function CustomizeScreen({ uploadedImage, onComplete }: Customize
         width: '1920px',
         height: '1080px',
         overflow: 'hidden',
-        backgroundColor: '#FF00FF',
+        backgroundColor: 'rgba(255, 231, 224, 1)',
         transform: 'none'
       }}
     >
@@ -457,7 +457,7 @@ export default function CustomizeScreen({ uploadedImage, onComplete }: Customize
           top: '240px', // Above the image
           width: `${imageDimensions.width}px`, // Match image width
           height: '40px',
-          backgroundColor: '#FF0000',
+          backgroundColor: 'rgba(255, 0, 255, 1)',
           borderRadius: '10px',
           cursor: 'pointer',
           display: 'flex',
@@ -472,10 +472,12 @@ export default function CustomizeScreen({ uploadedImage, onComplete }: Customize
         data-name="Download Button"
       >
         <div style={{
-          fontFamily: 'Michroma, sans-serif',
-          fontSize: '12px',
-          color: 'white',
+          fontFamily: 'Akira Expanded, sans-serif',
+          fontSize: '14px',
+          color: '#FFF',
           textAlign: 'center',
+          fontStyle: 'normal',
+          fontWeight: 800,
           lineHeight: 'normal'
         }}>
           <p style={{ margin: 0, lineHeight: 'normal' }}>DOWNLOAD</p>

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Akira+Expanded:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -41,8 +44,8 @@
   --sidebar-ring: oklch(0.708 0 0);
   
   /* Custom colors for the Figma design */
-  --magenta: #FF00FF;
-  --red: #FF0000;
+  --magenta: rgba(255, 231, 224, 1);
+  --red: #DD500B;
 }
 
 .dark {
@@ -82,8 +85,8 @@
   --sidebar-ring: oklch(0.439 0 0);
   
   /* Custom colors for the Figma design */
-  --magenta: #FF00FF;
-  --red: #FF0000;
+  --magenta: rgba(255, 231, 224, 1);
+  --red: #DD500B;
 }
 
 @theme inline {

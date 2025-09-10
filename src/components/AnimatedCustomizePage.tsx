@@ -20,7 +20,7 @@ export default function AnimatedCustomizePage({ onReady }: AnimatedCustomizePage
         width: '1920px', 
         height: '1080px', 
         overflow: 'hidden',
-        backgroundColor: '#FF00FF',
+        backgroundColor: 'rgba(255, 231, 224, 1)',
         transform: 'none'
       }}
     >
@@ -38,7 +38,7 @@ export default function AnimatedCustomizePage({ onReady }: AnimatedCustomizePage
           top: `${cardTop}px`,
           width: `${cardWidth}px`,
           height: `${cardHeight}px`,
-          backgroundColor: '#FF0000',
+          backgroundColor: '#DD500B',
           borderRadius: '13px',
           boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
           zIndex: 100
@@ -62,14 +62,15 @@ export default function AnimatedCustomizePage({ onReady }: AnimatedCustomizePage
             top: '29px',
             width: '444px',
             height: '49px',
-            fontFamily: 'Michroma, sans-serif',
+            fontFamily: 'Akira Expanded, sans-serif',
             fontSize: '35px',
-            color: 'white',
+            color: '#FFE7E0',
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            lineHeight: 0,
+            lineHeight: 'normal',
+            fontWeight: 800,
             zIndex: 1
           }}
           data-name="Customise Title"
@@ -84,14 +85,15 @@ export default function AnimatedCustomizePage({ onReady }: AnimatedCustomizePage
             top: '120px',
             width: '453px',
             height: '154px',
-            fontFamily: 'Michroma, sans-serif',
-            fontSize: '20px',
-            color: 'white',
+            fontFamily: 'Chivo, sans-serif',
+            fontSize: '32px',
+            color: '#FFE7E0',
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             lineHeight: 'normal',
+            fontWeight: 400,
             zIndex: 1
           }}
           data-name="Instructions Text"
@@ -101,29 +103,32 @@ export default function AnimatedCustomizePage({ onReady }: AnimatedCustomizePage
           </p>
         </div>
 
-        <div
-          style={{
-            position: 'absolute',
-            left: '56px',
-            top: '320px',
-            width: '397px',
-            height: '43px',
-            backgroundColor: '#FF00FF',
-            borderRadius: '15px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 3
-          }}
+          <div
+            style={{
+              position: 'absolute',
+              left: '56px',
+              top: '320px',
+              width: '397px',
+              height: '43px',
+              backgroundColor: '#F0F',
+              border: '1px solid #F0F',
+              borderRadius: '15px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 3
+            }}
           onClick={onReady}
           data-name="Ready Button"
         >
           <div style={{
-            fontFamily: 'Michroma, sans-serif',
-            fontSize: '12px',
-            color: 'white',
+            fontFamily: 'Akira Expanded, sans-serif',
+            fontSize: '14px',
+            color: '#FFE7E0',
             textAlign: 'center',
+            fontStyle: 'normal',
+            fontWeight: 800,
             lineHeight: 'normal'
           }}>
             <p style={{ margin: 0, lineHeight: 'normal' }}>I'M READY</p>

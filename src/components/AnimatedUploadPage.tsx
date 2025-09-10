@@ -10,7 +10,6 @@ import imgGroup121 from "figma:asset/9318e762097bdb0a643cc925f5de9ae11fa1c92c.pn
 import imgGroup32 from "figma:asset/fead91a18d276467d72427f35a1a6aa2c9baa7c7.png";
 import imgImage6 from "figma:asset/7e3670b5570ecbbdbf2fd131bb36b9e26e07f87d.png";
 import imgImage12 from "figma:asset/feed20764d16a1b14475aeac38e5b14342ea170e.png";
-import imgImage7 from "figma:asset/3881de7c145f96fda594ebbc2a8697ad761f0e13.png";
 import imgImage1 from "figma:asset/59db2a219c37ee84a5118dcb99d24a4b13204a11.png";
 import imgGroup161 from "figma:asset/d64d9cb8d649e238ff21365988ab6e1801c4c985.png";
 
@@ -69,7 +68,7 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
         width: '1920px', 
         height: '1080px', 
         overflow: 'hidden',
-        backgroundColor: '#FF00FF',
+        backgroundColor: 'rgba(255, 231, 224, 1)',
         transform: 'none'
       }}
       data-name="Desktop - 8"
@@ -85,7 +84,6 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
           top: '105px',
           width: '622px',
           height: '95px',
-          backgroundImage: `url('${imgImage7}')`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -102,7 +100,7 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
           top: `${cardTop}px`,
           width: `${cardWidth}px`,
           height: `${cardHeight}px`,
-          backgroundColor: '#FF0000',
+          backgroundColor: '#DD500B',
           borderRadius: '13px',
           boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
           zIndex: 100
@@ -144,7 +142,17 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
           }}
           data-name="Upload Shot Title"
         >
-          <p style={{ margin: 0, lineHeight: 'normal' }}>UPLOAD SHOT</p>
+          <p style={{ 
+            margin: 0, 
+            lineHeight: 'normal',
+            color: '#FFE7E0',
+            textAlign: 'center',
+            fontFamily: 'Akira Expanded',
+            fontSize: '27px',
+            fontStyle: 'normal',
+            fontWeight: 800,
+            letterSpacing: '2.7px'
+          }}>UPLOAD SHOT</p>
         </div>
 
         {/* Inner Drop Area - positioned relative to card */}
@@ -157,13 +165,13 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
             top: '112px', // 398.662 - 62.47 - 223.896 ≈ 112px from top
             width: '442px',
             height: '224px',
-            backgroundColor: isDragActive ? '#a2d8a4' : '#FF00FF',
+            backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
             borderRadius: '7px',
             cursor: 'pointer',
             zIndex: 2
           }}
           animate={{
-            backgroundColor: isDragActive ? '#a2d8a4' : '#FF00FF'
+            backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)'
           }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
 
@@ -172,14 +180,14 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
           <motion.div 
             style={{
               position: 'absolute',
-              border: isDragActive ? '3px dashed #a2d8a4' : '3px solid #FF00FF',
+              border: isDragActive ? '3px dashed #a2d8a4' : '3px solid rgba(255, 231, 224, 1)',
               borderRadius: '10px',
               inset: '-3px',
               pointerEvents: 'none',
               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)'
             }}
             animate={{
-              borderColor: isDragActive ? '#a2d8a4' : '#FF00FF',
+              borderColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
               borderStyle: isDragActive ? 'dashed' : 'solid'
             }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -227,11 +235,44 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
             data-name="Drag Drop Text"
           >
             {isDragActive ? (
-              <p style={{ margin: 0 }}>DROP EM HERE</p>
+              <p style={{ 
+                margin: 0,
+                color: '#1E1E1E',
+                textAlign: 'center',
+                WebkitTextStrokeWidth: '0.3px',
+                WebkitTextStrokeColor: '#1E1E1E',
+                fontFamily: 'Chivo',
+                fontSize: '20px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: 'normal'
+              }}>DROP EM HERE</p>
             ) : (
               <>
-                <p style={{ margin: 0 }}>DRAG & DROP</p>
-                <p style={{ margin: 0 }}>TO UPLOAD</p>
+                <p style={{ 
+                  margin: 0,
+                  color: '#1E1E1E',
+                  textAlign: 'center',
+                  WebkitTextStrokeWidth: '0.3px',
+                  WebkitTextStrokeColor: '#1E1E1E',
+                  fontFamily: 'Chivo, sans-serif',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: 400,
+                  lineHeight: 'normal'
+                }}>DRAG & DROP</p>
+                <p style={{ 
+                  margin: 0,
+                  color: '#1E1E1E',
+                  textAlign: 'center',
+                  WebkitTextStrokeWidth: '0.3px',
+                  WebkitTextStrokeColor: '#1E1E1E',
+                  fontFamily: 'Chivo, sans-serif',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: 400,
+                  lineHeight: 'normal'
+                }}>TO UPLOAD</p>
               </>
             )}
           </div>

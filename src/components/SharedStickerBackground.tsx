@@ -7,7 +7,6 @@ import imgImage2 from "figma:asset/aba441c6984ddd88966846b48f2d123550cf1b3b.png"
 import imgImage17 from "figma:asset/9eb72bff05e63bf1a10a6d0e0e9a1a7848730efc.png";
 import imgImage6 from "figma:asset/7e3670b5570ecbbdbf2fd131bb36b9e26e07f87d.png";
 import imgImage12 from "figma:asset/feed20764d16a1b14475aeac38e5b14342ea170e.png";
-import imgImage8 from "figma:asset/3881de7c145f96fda594ebbc2a8697ad761f0e13.png";
 
 // Shared hover animation properties
 const hoverAnimation = {
@@ -210,7 +209,6 @@ export default function SharedStickerBackground() {
       <motion.div 
         className="absolute bg-center bg-cover bg-no-repeat h-[95px] left-1/2 top-[105px] translate-x-[-50%] w-[622px]" 
         data-name="image 7" 
-        style={{ backgroundImage: `url('${imgImage8}')` }}
         whileHover={hoverAnimation}
         transition={hoverTransition}
       />

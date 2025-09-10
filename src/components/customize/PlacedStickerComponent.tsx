@@ -371,7 +371,7 @@ export default function PlacedStickerComponent({
               right: `${UI_SPACING.DELETE_BUTTON_RIGHT}px`,
               width: `${UI_SPACING.DELETE_BUTTON_SIZE}px`,
               height: `${UI_SPACING.DELETE_BUTTON_SIZE}px`,
-              backgroundColor: '#FF0000',
+              backgroundColor: '#DD500B',
               borderRadius: '50%',
               cursor: 'pointer',
               border: '3px solid white',
@@ -392,7 +392,7 @@ export default function PlacedStickerComponent({
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.backgroundColor = '#FF0000';
+              e.currentTarget.style.backgroundColor = '#DD500B';
             }}
           >
             ×
@@ -459,7 +459,7 @@ export default function PlacedStickerComponent({
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            <span style={{ color: '#FF0000', fontWeight: 'bold' }}>×</span>
+            <span style={{ color: '#DD500B', fontWeight: 'bold' }}>×</span>
             Delete Sticker
           </div>
           <div

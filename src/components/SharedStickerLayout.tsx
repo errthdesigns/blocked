@@ -9,7 +9,6 @@ import imgImage6 from "figma:asset/7e3670b5570ecbbdbf2fd131bb36b9e26e07f87d.png"
 import imgImage12 from "figma:asset/feed20764d16a1b14475aeac38e5b14342ea170e.png";
 import imgImage1 from "figma:asset/59db2a219c37ee84a5118dcb99d24a4b13204a11.png";
 import imgGroup161 from "figma:asset/d64d9cb8d649e238ff21365988ab6e1801c4c985.png";
-import imgImage7 from "figma:asset/3881de7c145f96fda594ebbc2a8697ad761f0e13.png";
 
 // Shared sticker positions - EXACT coordinates from working FullTransitionFlow
 export function SharedStickerLayout() {
@@ -23,7 +22,6 @@ export function SharedStickerLayout() {
           top: '105px',
           width: '622px',
           height: '95px',
-          backgroundImage: `url('${imgImage7}')`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',

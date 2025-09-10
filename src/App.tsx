@@ -4,6 +4,7 @@ import AnimatedHomescreen from './components/AnimatedHomescreen';
 import FullTransitionFlow from './components/FullTransitionFlow';
 import CustomizeScreen from './components/CustomizeScreen';
 import AnimatedCustomizePage from './components/AnimatedCustomizePage';
+import imgImage7 from './assets/header1.png';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'upload' | 'instructions' | 'customize' | 'final'>('home');
@@ -67,7 +68,7 @@ export default function App() {
         position: 'fixed',
         top: 0,
         left: 0,
-        backgroundColor: '#FF00FF'
+        backgroundColor: 'rgba(255, 231, 224, 1)'
       }}
       onClick={currentPage === 'home' ? handleScreenClick : undefined}
     >
@@ -82,9 +83,34 @@ export default function App() {
           top: '50%',
           marginLeft: '-960px', // Half of 1920px
           marginTop: '-540px',  // Half of 1080px
-          backgroundColor: '#FF00FF'
+          backgroundColor: 'rgba(255, 231, 224, 1)'
         }}
       >
+        {/* Global Header - COCKBLOCK ALWAYS USE PROTECTION */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '1920px',
+            height: '26px',
+            flexShrink: 0,
+            backgroundImage: `url('${imgImage7}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            zIndex: 1000
+          }}
+          initial={{ y: -150, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 120, 
+            damping: 12, 
+            delay: 0.1,
+            duration: 1.2
+          }}
+        />
       <AnimatePresence mode="wait">
         {currentPage === 'home' ? (
           <motion.div
