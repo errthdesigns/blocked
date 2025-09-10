@@ -165,13 +165,13 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
             top: '112px', // 398.662 - 62.47 - 223.896 ≈ 112px from top
             width: '442px',
             height: '224px',
-            backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
+            backgroundColor: isDragActive ? 'rgba(255, 0, 255, 1)' : 'rgba(255, 231, 224, 1)',
             borderRadius: '7px',
             cursor: 'pointer',
             zIndex: 2
           }}
           animate={{
-            backgroundColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)'
+            backgroundColor: isDragActive ? 'rgba(255, 0, 255, 1)' : 'rgba(255, 231, 224, 1)'
           }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
 
@@ -180,14 +180,14 @@ export default function AnimatedUploadPage({ onNext, onImageUpload }: AnimatedUp
           <motion.div 
             style={{
               position: 'absolute',
-              border: isDragActive ? '3px dashed #a2d8a4' : '3px solid rgba(255, 231, 224, 1)',
+              border: isDragActive ? '3px dashed rgba(255, 0, 255, 1)' : '3px solid rgba(255, 231, 224, 1)',
               borderRadius: '10px',
               inset: '-3px',
               pointerEvents: 'none',
               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)'
             }}
             animate={{
-              borderColor: isDragActive ? '#a2d8a4' : 'rgba(255, 231, 224, 1)',
+              borderColor: isDragActive ? 'rgba(255, 0, 255, 1)' : 'rgba(255, 231, 224, 1)',
               borderStyle: isDragActive ? 'dashed' : 'solid'
             }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}

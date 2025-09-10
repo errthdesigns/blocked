@@ -68,7 +68,8 @@ export default function App() {
         position: 'fixed',
         top: 0,
         left: 0,
-        backgroundColor: 'rgba(255, 231, 224, 1)'
+        backgroundColor: 'rgba(255, 231, 224, 1)',
+        cursor: 'url(/cursor.png) 16 16, auto'
       }}
       onClick={currentPage === 'home' ? handleScreenClick : undefined}
     >
