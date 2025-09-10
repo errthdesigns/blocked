@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import AnimatedHomescreen from './components/AnimatedHomescreen';
 import FullTransitionFlow from './components/FullTransitionFlow';
@@ -10,6 +10,19 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'upload' | 'instructions' | 'customize' | 'final'>('home');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
+
+  // Force custom cursor restoration
+  const forceCustomCursor = () => {
+    const cursorStyle = 'url(/cursor.png) 16 16, auto';
+    document.body.style.cursor = cursorStyle;
+    document.documentElement.style.cursor = cursorStyle;
+    
+    // Apply to all elements
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach((element: Element) => {
+      (element as HTMLElement).style.cursor = cursorStyle;
+    });
+  };
 
   // Calculate scale to cover viewport completely (crop overflow, no gaps)
   useEffect(() => {
@@ -23,6 +36,48 @@ export default function App() {
     updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  // Cursor restoration effect
+  useEffect(() => {
+    // Initial cursor setup
+    forceCustomCursor();
+
+    // Restore cursor after various events that might reset it
+    const events = [
+      'mousemove',
+      'mouseenter', 
+      'mouseleave',
+      'focus',
+      'blur',
+      'click',
+      'keydown',
+      'keyup',
+      'scroll',
+      'resize',
+      'visibilitychange'
+    ];
+
+    const restoreCursor = () => {
+      // Small delay to ensure the event has processed
+      setTimeout(forceCustomCursor, 10);
+    };
+
+    events.forEach(event => {
+      document.addEventListener(event, restoreCursor, true);
+      window.addEventListener(event, restoreCursor, true);
+    });
+
+    // Also restore cursor periodically as a fallback
+    const cursorInterval = setInterval(forceCustomCursor, 1000);
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, restoreCursor, true);
+        window.removeEventListener(event, restoreCursor, true);
+      });
+      clearInterval(cursorInterval);
+    };
   }, []);
 
   const handleScreenClick = () => {

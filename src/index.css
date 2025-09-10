@@ -1,11 +1,7 @@
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 
-/* Custom cursor */
-html {
-  cursor: url('/cursor.png') 16 16, auto !important;
-}
-
-body {
+/* Custom cursor - More aggressive approach */
+html, body {
   cursor: url('/cursor.png') 16 16, auto !important;
 }
 
@@ -13,13 +9,22 @@ body {
   cursor: url('/cursor.png') 16 16, auto !important;
 }
 
-button, a, [role="button"], [onclick], .cursor-pointer {
-  cursor: url('/cursor.png') 16 16, pointer !important;
+/* Force cursor on all elements with higher specificity */
+html *, body *, div, span, p, h1, h2, h3, h4, h5, h6, 
+button, a, [role="button"], [onclick], .cursor-pointer,
+input, textarea, select, option, label, form, fieldset,
+img, svg, canvas, video, audio, iframe, object, embed {
+  cursor: url('/cursor.png') 16 16, auto !important;
 }
 
-/* Force cursor on all elements */
-div, span, p, h1, h2, h3, h4, h5, h6 {
+/* Override any potential cursor resets */
+*:hover, *:focus, *:active, *:visited {
   cursor: url('/cursor.png') 16 16, auto !important;
+}
+
+/* Ensure cursor persists on interactive elements */
+button:hover, a:hover, [role="button"]:hover, [onclick]:hover {
+  cursor: url('/cursor.png') 16 16, pointer !important;
 }
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
