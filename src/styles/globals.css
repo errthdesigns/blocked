@@ -1,51 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Akira+Expanded:wght@400;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400&display=swap');
 
-/* Custom cursor - Ultra aggressive approach with data URL */
-:root {
-  --custom-cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=') 16 16, auto;
-  --custom-pointer: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=') 16 16, pointer;
+/* Custom cursor */
+html {
+  cursor: url('/cursor.png') 16 16, auto !important;
 }
 
-html, body {
-  cursor: var(--custom-cursor) !important;
+body {
+  cursor: url('/cursor.png') 16 16, auto !important;
 }
 
 * {
-  cursor: var(--custom-cursor) !important;
+  cursor: url('/cursor.png') 16 16, auto !important;
 }
 
-/* Force cursor on all elements with maximum specificity */
-html *, body *, div, span, p, h1, h2, h3, h4, h5, h6, 
-button, a, [role="button"], [onclick], .cursor-pointer,
-input, textarea, select, option, label, form, fieldset,
-img, svg, canvas, video, audio, iframe, object, embed,
-section, article, header, footer, nav, main, aside,
-ul, ol, li, table, tr, td, th, thead, tbody, tfoot {
-  cursor: var(--custom-cursor) !important;
+/* Ensure cursor works on all interactive elements */
+div, span, p, h1, h2, h3, h4, h5, h6 {
+  cursor: url('/cursor.png') 16 16, auto !important;
 }
 
-/* Override any potential cursor resets with maximum specificity */
-*:hover, *:focus, *:active, *:visited, *:focus-visible, *:focus-within {
-  cursor: var(--custom-cursor) !important;
-}
-
-/* Ensure cursor persists on interactive elements */
-button, a, [role="button"], [onclick], .cursor-pointer,
-button:hover, a:hover, [role="button"]:hover, [onclick]:hover,
-button:focus, a:focus, [role="button"]:focus, [onclick]:focus,
-button:active, a:active, [role="button"]:active, [onclick]:active {
-  cursor: var(--custom-pointer) !important;
-}
-
-/* Force cursor on all pseudo-elements */
-*::before, *::after {
-  cursor: var(--custom-cursor) !important;
-}
-
-/* Override any CSS that might reset cursor */
-[style*="cursor"] {
-  cursor: var(--custom-cursor) !important;
+/* Specific cursor for clickable elements */
+button, a, [role="button"], [onclick] {
+  cursor: url('/cursor.png') 16 16, pointer !important;
 }
 
 @custom-variant dark (&:is(.dark *));

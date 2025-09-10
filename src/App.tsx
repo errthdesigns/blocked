@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import AnimatedHomescreen from './components/AnimatedHomescreen';
 import FullTransitionFlow from './components/FullTransitionFlow';
 import CustomizeScreen from './components/CustomizeScreen';
 import AnimatedCustomizePage from './components/AnimatedCustomizePage';
 import imgImage7 from './assets/header1.png';
-import cursorImage from './assets/cursor1.png';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'upload' | 'instructions' | 'customize' | 'final'>('home');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [showCustomCursor, setShowCustomCursor] = useState(true);
-
-  // Using overlay cursor; hide the native cursor globally
-  const forceCustomCursor = () => {
-    document.documentElement.style.cursor = 'none';
-    document.body.style.cursor = 'none';
-  };
 
   // Calculate scale to cover viewport completely (crop overflow, no gaps)
   useEffect(() => {
@@ -32,58 +23,6 @@ export default function App() {
     updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
-  }, []);
-
-  // Simplified but effective cursor hiding
-  useEffect(() => {
-    const hideCursor = () => {
-      document.documentElement.style.cursor = 'none';
-      document.body.style.cursor = 'none';
-    };
-
-    // Track mouse position
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    // Track drag events
-    const handleDragOver = (e: DragEvent) => {
-      e.preventDefault();
-      setShowCustomCursor(true);
-      if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
-        setMousePosition({ x: e.clientX, y: e.clientY });
-      }
-    };
-
-    const handleDragEnter = (e: DragEvent) => {
-      setShowCustomCursor(true);
-    };
-
-    const clearDragState = () => {
-      setShowCustomCursor(true);
-    };
-
-    // Initial hide
-    hideCursor();
-
-    // Add event listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('dragover', handleDragOver);
-    window.addEventListener('dragenter', handleDragEnter);
-    window.addEventListener('dragleave', clearDragState);
-    window.addEventListener('drop', clearDragState);
-
-    // Simple interval to re-hide cursor
-    const cursorInterval = setInterval(hideCursor, 100);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('dragover', handleDragOver);
-      window.removeEventListener('dragenter', handleDragEnter);
-      window.removeEventListener('dragleave', clearDragState);
-      window.removeEventListener('drop', clearDragState);
-      clearInterval(cursorInterval);
-    };
   }, []);
 
   const handleScreenClick = () => {
@@ -130,7 +69,7 @@ export default function App() {
         top: 0,
         left: 0,
         backgroundColor: 'rgba(255, 231, 224, 1)',
-        cursor: 'none'
+        cursor: 'url(/cursor.png) 16 16, auto'
       }}
       onClick={currentPage === 'home' ? handleScreenClick : undefined}
     >
@@ -173,28 +112,6 @@ export default function App() {
             duration: 1.2
           }}
         />
-      {/* Custom Cursor Overlay */}
-      {showCustomCursor && (
-        <img
-          src={cursorImage}
-          alt="cursor"
-          draggable={false}
-          style={{
-            position: 'fixed',
-            left: mousePosition.x,
-            top: mousePosition.y,
-            width: '32px',
-            height: '32px',
-            transform: 'translate(-50%, -50%)',
-            pointerEvents: 'none',
-            userSelect: 'none',
-            zIndex: 9999,
-            imageRendering: 'auto',
-            willChange: 'transform'
-          }}
-        />
-      )}
-
       <AnimatePresence mode="wait">
         {currentPage === 'home' ? (
           <motion.div
