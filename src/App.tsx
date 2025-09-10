@@ -32,16 +32,52 @@ export default function App() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
-  // Simple cursor restoration effect
+  // Ultra-aggressive cursor restoration effect
   useEffect(() => {
     // Initial cursor setup
     forceCustomCursor();
 
-    // Simple interval to restore cursor
-    const cursorInterval = setInterval(forceCustomCursor, 50);
+    // Multiple restoration methods
+    const restoreCursor = () => {
+      forceCustomCursor();
+      // Also try setting on all elements
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach((element: Element) => {
+        (element as HTMLElement).style.cursor = 'crosshair';
+      });
+    };
+
+    // Very frequent interval
+    const cursorInterval = setInterval(restoreCursor, 10);
+
+    // Also restore on every mouse movement
+    const handleMouseMove = () => {
+      restoreCursor();
+    };
+
+    // Restore on focus events
+    const handleFocus = () => {
+      restoreCursor();
+    };
+
+    // Add event listeners
+    document.addEventListener('mousemove', handleMouseMove, true);
+    document.addEventListener('mouseenter', handleMouseMove, true);
+    document.addEventListener('mouseleave', handleMouseMove, true);
+    document.addEventListener('focus', handleFocus, true);
+    document.addEventListener('blur', handleFocus, true);
+    window.addEventListener('focus', handleFocus, true);
+    window.addEventListener('blur', handleFocus, true);
 
     return () => {
       clearInterval(cursorInterval);
+      document.removeEventListener('mousemove', handleMouseMove, true);
+      document.removeEventListener('mouseenter', handleMouseMove, true);
+      document.removeEventListener('mouseleave', handleMouseMove, true);
+      document.removeEventListener('focus', handleFocus, true);
+      document.removeEventListener('blur', handleFocus, true);
+      window.removeEventListener('focus', handleFocus, true);
+      window.removeEventListener('blur', handleFocus, true);
     };
   }, []);
 
