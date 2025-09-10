@@ -1,31 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Akira+Expanded:wght@400;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400&display=swap');
 
-/* Custom cursor - More aggressive approach */
+/* Custom cursor - Ultra aggressive approach */
+:root {
+  --custom-cursor: url('/cursor.png') 16 16, auto;
+  --custom-pointer: url('/cursor.png') 16 16, pointer;
+}
+
 html, body {
-  cursor: url('/cursor.png') 16 16, auto !important;
+  cursor: var(--custom-cursor) !important;
 }
 
 * {
-  cursor: url('/cursor.png') 16 16, auto !important;
+  cursor: var(--custom-cursor) !important;
 }
 
-/* Force cursor on all elements with higher specificity */
+/* Force cursor on all elements with maximum specificity */
 html *, body *, div, span, p, h1, h2, h3, h4, h5, h6, 
 button, a, [role="button"], [onclick], .cursor-pointer,
 input, textarea, select, option, label, form, fieldset,
-img, svg, canvas, video, audio, iframe, object, embed {
-  cursor: url('/cursor.png') 16 16, auto !important;
+img, svg, canvas, video, audio, iframe, object, embed,
+section, article, header, footer, nav, main, aside,
+ul, ol, li, table, tr, td, th, thead, tbody, tfoot {
+  cursor: var(--custom-cursor) !important;
 }
 
-/* Override any potential cursor resets */
-*:hover, *:focus, *:active, *:visited {
-  cursor: url('/cursor.png') 16 16, auto !important;
+/* Override any potential cursor resets with maximum specificity */
+*:hover, *:focus, *:active, *:visited, *:focus-visible, *:focus-within {
+  cursor: var(--custom-cursor) !important;
 }
 
 /* Ensure cursor persists on interactive elements */
-button:hover, a:hover, [role="button"]:hover, [onclick]:hover {
-  cursor: url('/cursor.png') 16 16, pointer !important;
+button, a, [role="button"], [onclick], .cursor-pointer,
+button:hover, a:hover, [role="button"]:hover, [onclick]:hover,
+button:focus, a:focus, [role="button"]:focus, [onclick]:focus,
+button:active, a:active, [role="button"]:active, [onclick]:active {
+  cursor: var(--custom-pointer) !important;
+}
+
+/* Force cursor on all pseudo-elements */
+*::before, *::after {
+  cursor: var(--custom-cursor) !important;
+}
+
+/* Override any CSS that might reset cursor */
+[style*="cursor"] {
+  cursor: var(--custom-cursor) !important;
 }
 
 @custom-variant dark (&:is(.dark *));

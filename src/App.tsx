@@ -11,17 +11,33 @@ export default function App() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
 
-  // Force custom cursor restoration
+  // Force custom cursor restoration - More aggressive approach
   const forceCustomCursor = () => {
     const cursorStyle = 'url(/cursor.png) 16 16, auto';
-    document.body.style.cursor = cursorStyle;
-    document.documentElement.style.cursor = cursorStyle;
+    const pointerStyle = 'url(/cursor.png) 16 16, pointer';
     
-    // Apply to all elements
+    // Apply to document and body
+    document.documentElement.style.cursor = cursorStyle;
+    document.body.style.cursor = cursorStyle;
+    
+    // Apply to all existing elements
     const allElements = document.querySelectorAll('*');
     allElements.forEach((element: Element) => {
-      (element as HTMLElement).style.cursor = cursorStyle;
+      const htmlElement = element as HTMLElement;
+      if (htmlElement.tagName === 'BUTTON' || 
+          htmlElement.tagName === 'A' || 
+          htmlElement.hasAttribute('onclick') ||
+          htmlElement.getAttribute('role') === 'button' ||
+          htmlElement.classList.contains('cursor-pointer')) {
+        htmlElement.style.cursor = pointerStyle;
+      } else {
+        htmlElement.style.cursor = cursorStyle;
+      }
     });
+    
+    // Also set CSS custom properties for global use
+    document.documentElement.style.setProperty('--custom-cursor', cursorStyle);
+    document.documentElement.style.setProperty('--custom-pointer', pointerStyle);
   };
 
   // Calculate scale to cover viewport completely (crop overflow, no gaps)
@@ -55,12 +71,23 @@ export default function App() {
       'keyup',
       'scroll',
       'resize',
-      'visibilitychange'
+      'visibilitychange',
+      'pointermove',
+      'pointerenter',
+      'pointerleave',
+      'pointerdown',
+      'pointerup',
+      'contextmenu',
+      'selectstart',
+      'dragstart',
+      'dragend'
     ];
 
     const restoreCursor = () => {
-      // Small delay to ensure the event has processed
-      setTimeout(forceCustomCursor, 10);
+      // Immediate restoration
+      forceCustomCursor();
+      // Also restore after a small delay
+      setTimeout(forceCustomCursor, 5);
     };
 
     events.forEach(event => {
@@ -68,8 +95,20 @@ export default function App() {
       window.addEventListener(event, restoreCursor, true);
     });
 
-    // Also restore cursor periodically as a fallback
-    const cursorInterval = setInterval(forceCustomCursor, 1000);
+    // More frequent cursor restoration as fallback
+    const cursorInterval = setInterval(forceCustomCursor, 100);
+
+    // MutationObserver to catch new elements
+    const observer = new MutationObserver(() => {
+      forceCustomCursor();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
 
     return () => {
       events.forEach(event => {
@@ -77,6 +116,7 @@ export default function App() {
         window.removeEventListener(event, restoreCursor, true);
       });
       clearInterval(cursorInterval);
+      observer.disconnect();
     };
   }, []);
 
