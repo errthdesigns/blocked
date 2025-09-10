@@ -5,6 +5,7 @@ import FullTransitionFlow from './components/FullTransitionFlow';
 import CustomizeScreen from './components/CustomizeScreen';
 import AnimatedCustomizePage from './components/AnimatedCustomizePage';
 import imgImage7 from './assets/header1.png';
+import cursorImage from './assets/cursor1.png';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'upload' | 'instructions' | 'customize' | 'final'>('home');
@@ -142,7 +143,10 @@ export default function App() {
         />
       {/* Custom Cursor Overlay */}
       {showCustomCursor && (
-        <div
+        <img
+          src={cursorImage}
+          alt="cursor"
+          draggable={false}
           style={{
             position: 'fixed',
             left: mousePosition.x,
@@ -151,9 +155,10 @@ export default function App() {
             height: '32px',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
+            userSelect: 'none',
             zIndex: 9999,
-            background: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=) no-repeat center',
-            backgroundSize: 'contain'
+            imageRendering: 'auto',
+            willChange: 'transform'
           }}
         />
       )}
