@@ -4,6 +4,11 @@
 html, body, * {
   cursor: none !important;
 }
+
+/* Ensure native cursor stays hidden during external file drag */
+.cb-dragging, .cb-dragging * {
+  cursor: none !important;
+}
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {

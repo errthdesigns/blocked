@@ -45,11 +45,38 @@ export default function App() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
+    // Track external file drag position and force hide native cursor
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      document.documentElement.classList.add('cb-dragging');
+      setShowCustomCursor(true);
+      if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      }
+    };
+
+    const handleDragEnter = (e: DragEvent) => {
+      document.documentElement.classList.add('cb-dragging');
+      setShowCustomCursor(true);
+    };
+
+    const clearDragState = () => {
+      document.documentElement.classList.remove('cb-dragging');
+    };
+
     // Add mouse tracking
     document.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('dragover', handleDragOver);
+    window.addEventListener('dragenter', handleDragEnter);
+    window.addEventListener('dragleave', clearDragState);
+    window.addEventListener('drop', clearDragState);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('dragenter', handleDragEnter);
+      window.removeEventListener('dragleave', clearDragState);
+      window.removeEventListener('drop', clearDragState);
     };
   }, []);
 
