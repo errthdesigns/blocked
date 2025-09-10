@@ -14,11 +14,10 @@ export default function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showCustomCursor, setShowCustomCursor] = useState(true);
 
-  // Simple cursor restoration - Test with built-in cursor
+  // Using overlay cursor; hide the native cursor globally
   const forceCustomCursor = () => {
-    // Test with built-in cursor first
-    document.documentElement.style.cursor = 'crosshair';
-    document.body.style.cursor = 'crosshair';
+    document.documentElement.style.cursor = 'none';
+    document.body.style.cursor = 'none';
   };
 
   // Calculate scale to cover viewport completely (crop overflow, no gaps)
@@ -98,7 +97,7 @@ export default function App() {
         top: 0,
         left: 0,
         backgroundColor: 'rgba(255, 231, 224, 1)',
-        cursor: 'crosshair'
+        cursor: 'none'
       }}
       onClick={currentPage === 'home' ? handleScreenClick : undefined}
     >
