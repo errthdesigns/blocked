@@ -34,134 +34,55 @@ export default function App() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
-  // Nuclear cursor hiding - completely override browser cursor system
+  // Simplified but effective cursor hiding
   useEffect(() => {
-    const forceHideCursor = () => {
-      // Nuclear approach - override every possible cursor property
-      const style = document.createElement('style');
-      style.id = 'nuclear-cursor-hide';
-      style.textContent = `
-        *, *::before, *::after, *:hover, *:focus, *:active, *:visited, *:link {
-          cursor: none !important;
-        }
-        html, body, div, span, p, h1, h2, h3, h4, h5, h6, 
-        input, textarea, select, button, a, img, svg, canvas, video, audio,
-        [role="button"], [onclick], [tabindex], [contenteditable],
-        [draggable="true"], .dragging, .drag-over, .drop-zone {
-          cursor: none !important;
-        }
-      `;
-      
-      // Remove existing style and add new one
-      const existing = document.getElementById('nuclear-cursor-hide');
-      if (existing) existing.remove();
-      document.head.appendChild(style);
-
-      // Force hide on all elements
+    const hideCursor = () => {
       document.documentElement.style.cursor = 'none';
       document.body.style.cursor = 'none';
-      
-      // Force hide on all interactive elements
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        (el as HTMLElement).style.cursor = 'none';
-        (el as HTMLElement).style.setProperty('cursor', 'none', 'important');
-      });
     };
 
     // Track mouse position
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      forceHideCursor();
     };
 
-    // Track all possible events that might show cursor
-    const handleAnyEvent = (e: Event) => {
-      forceHideCursor();
-      // Prevent default cursor behavior
-      if (e.preventDefault) e.preventDefault();
-    };
-
-    // Track external file drag position and force hide native cursor
+    // Track drag events
     const handleDragOver = (e: DragEvent) => {
       e.preventDefault();
-      document.documentElement.classList.add('cb-dragging');
       setShowCustomCursor(true);
-      forceHideCursor();
       if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
         setMousePosition({ x: e.clientX, y: e.clientY });
       }
     };
 
     const handleDragEnter = (e: DragEvent) => {
-      e.preventDefault();
-      document.documentElement.classList.add('cb-dragging');
       setShowCustomCursor(true);
-      forceHideCursor();
     };
 
     const clearDragState = () => {
-      document.documentElement.classList.remove('cb-dragging');
-      forceHideCursor();
+      setShowCustomCursor(true);
     };
 
     // Initial hide
-    forceHideCursor();
+    hideCursor();
 
-    // Add all event listeners with capture phase
-    const events = [
-      'mousemove', 'mouseover', 'mouseenter', 'mouseleave', 'mousedown', 'mouseup',
-      'click', 'dblclick', 'focus', 'blur', 'keydown', 'keyup', 'keypress',
-      'scroll', 'resize', 'visibilitychange', 'pointermove', 'pointerenter', 
-      'pointerleave', 'contextmenu', 'dragstart', 'dragend', 'drag', 'dragover',
-      'dragenter', 'dragleave', 'drop', 'touchstart', 'touchend', 'touchmove'
-    ];
+    // Add event listeners
+    document.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('dragover', handleDragOver);
+    window.addEventListener('dragenter', handleDragEnter);
+    window.addEventListener('dragleave', clearDragState);
+    window.addEventListener('drop', clearDragState);
 
-    events.forEach(event => {
-      document.addEventListener(event, handleAnyEvent, true); // Capture phase
-      window.addEventListener(event, handleAnyEvent, true);
-    });
-
-    // Special handling for drag events
-    window.addEventListener('dragover', handleDragOver, true);
-    window.addEventListener('dragenter', handleDragEnter, true);
-    window.addEventListener('dragleave', clearDragState, true);
-    window.addEventListener('drop', clearDragState, true);
-
-    // Nuclear interval - every 5ms
-    const cursorInterval = setInterval(forceHideCursor, 5);
-
-    // Mutation observer to catch new elements
-    const observer = new MutationObserver(() => {
-      forceHideCursor();
-    });
-    observer.observe(document.body, { 
-      childList: true, 
-      subtree: true, 
-      attributes: true,
-      attributeFilter: ['style', 'class', 'cursor']
-    });
-
-    // RequestAnimationFrame approach for maximum coverage
-    const rafHide = () => {
-      forceHideCursor();
-      requestAnimationFrame(rafHide);
-    };
-    rafHide();
+    // Simple interval to re-hide cursor
+    const cursorInterval = setInterval(hideCursor, 100);
 
     return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, handleAnyEvent, true);
-        window.removeEventListener(event, handleAnyEvent, true);
-      });
-      window.removeEventListener('dragover', handleDragOver, true);
-      window.removeEventListener('dragenter', handleDragEnter, true);
-      window.removeEventListener('dragleave', clearDragState, true);
-      window.removeEventListener('drop', clearDragState, true);
+      document.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('dragenter', handleDragEnter);
+      window.removeEventListener('dragleave', clearDragState);
+      window.removeEventListener('drop', clearDragState);
       clearInterval(cursorInterval);
-      observer.disconnect();
-      const existing = document.getElementById('nuclear-cursor-hide');
-      if (existing) existing.remove();
     };
   }, []);
 
