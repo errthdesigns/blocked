@@ -10,6 +10,8 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'upload' | 'instructions' | 'customize' | 'final'>('home');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showCustomCursor, setShowCustomCursor] = useState(true);
 
   // Simple cursor restoration - Test with built-in cursor
   const forceCustomCursor = () => {
@@ -32,52 +34,22 @@ export default function App() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
-  // Ultra-aggressive cursor restoration effect
+  // Custom cursor overlay approach
   useEffect(() => {
-    // Initial cursor setup
-    forceCustomCursor();
+    // Hide the default cursor
+    document.documentElement.style.cursor = 'none';
+    document.body.style.cursor = 'none';
 
-    // Multiple restoration methods
-    const restoreCursor = () => {
-      forceCustomCursor();
-      // Also try setting on all elements
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach((element: Element) => {
-        (element as HTMLElement).style.cursor = 'crosshair';
-      });
+    // Track mouse position
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Very frequent interval
-    const cursorInterval = setInterval(restoreCursor, 10);
-
-    // Also restore on every mouse movement
-    const handleMouseMove = () => {
-      restoreCursor();
-    };
-
-    // Restore on focus events
-    const handleFocus = () => {
-      restoreCursor();
-    };
-
-    // Add event listeners
-    document.addEventListener('mousemove', handleMouseMove, true);
-    document.addEventListener('mouseenter', handleMouseMove, true);
-    document.addEventListener('mouseleave', handleMouseMove, true);
-    document.addEventListener('focus', handleFocus, true);
-    document.addEventListener('blur', handleFocus, true);
-    window.addEventListener('focus', handleFocus, true);
-    window.addEventListener('blur', handleFocus, true);
+    // Add mouse tracking
+    document.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      clearInterval(cursorInterval);
-      document.removeEventListener('mousemove', handleMouseMove, true);
-      document.removeEventListener('mouseenter', handleMouseMove, true);
-      document.removeEventListener('mouseleave', handleMouseMove, true);
-      document.removeEventListener('focus', handleFocus, true);
-      document.removeEventListener('blur', handleFocus, true);
-      window.removeEventListener('focus', handleFocus, true);
-      window.removeEventListener('blur', handleFocus, true);
+      document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -168,6 +140,23 @@ export default function App() {
             duration: 1.2
           }}
         />
+      {/* Custom Cursor Overlay */}
+      {showCustomCursor && (
+        <div
+          style={{
+            position: 'fixed',
+            left: mousePosition.x - 8,
+            top: mousePosition.y - 8,
+            width: '16px',
+            height: '16px',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            background: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=) no-repeat center',
+            backgroundSize: 'contain'
+          }}
+        />
+      )}
+
       <AnimatePresence mode="wait">
         {currentPage === 'home' ? (
           <motion.div

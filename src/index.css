@@ -1,41 +1,8 @@
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 
-/* Custom cursor - Ultra aggressive with animation */
-@keyframes forceCursor {
-  0% { cursor: crosshair !important; }
-  100% { cursor: crosshair !important; }
-}
-
+/* Custom cursor - Hide default cursor, use overlay instead */
 html, body, * {
-  cursor: crosshair !important;
-  animation: forceCursor 0.1s infinite !important;
-}
-
-/* Override for interactive elements */
-button, a, [role="button"], [onclick], .cursor-pointer {
-  cursor: crosshair !important;
-  animation: forceCursor 0.1s infinite !important;
-}
-
-/* Force cursor on all states */
-*:hover, *:focus, *:active, *:visited, *:focus-visible, *:focus-within {
-  cursor: crosshair !important;
-  animation: forceCursor 0.1s infinite !important;
-}
-
-/* Force cursor on pseudo-elements */
-*::before, *::after {
-  cursor: crosshair !important;
-  animation: forceCursor 0.1s infinite !important;
-}
-
-/* Additional aggressive selectors */
-html *, body *, div, span, p, h1, h2, h3, h4, h5, h6, 
-button, a, [role="button"], [onclick], .cursor-pointer,
-input, textarea, select, option, label, form, fieldset,
-img, svg, canvas, video, audio, iframe, object, embed {
-  cursor: crosshair !important;
-  animation: forceCursor 0.1s infinite !important;
+  cursor: none !important;
 }
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
