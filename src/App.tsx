@@ -34,15 +34,29 @@ export default function App() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
-  // Custom cursor overlay approach
+  // Custom cursor overlay approach - ultra aggressive cursor hiding
   useEffect(() => {
-    // Hide the default cursor
-    document.documentElement.style.cursor = 'none';
-    document.body.style.cursor = 'none';
+    const forceHideCursor = () => {
+      // Hide cursor on all elements
+      document.documentElement.style.cursor = 'none';
+      document.body.style.cursor = 'none';
+      
+      // Force hide on all interactive elements
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        (el as HTMLElement).style.cursor = 'none';
+      });
+    };
 
     // Track mouse position
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      forceHideCursor(); // Re-hide cursor on every mouse move
+    };
+
+    // Track all possible events that might show cursor
+    const handleAnyEvent = () => {
+      forceHideCursor();
     };
 
     // Track external file drag position and force hide native cursor
@@ -50,6 +64,7 @@ export default function App() {
       e.preventDefault();
       document.documentElement.classList.add('cb-dragging');
       setShowCustomCursor(true);
+      forceHideCursor();
       if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
         setMousePosition({ x: e.clientX, y: e.clientY });
       }
@@ -58,25 +73,80 @@ export default function App() {
     const handleDragEnter = (e: DragEvent) => {
       document.documentElement.classList.add('cb-dragging');
       setShowCustomCursor(true);
+      forceHideCursor();
     };
 
     const clearDragState = () => {
       document.documentElement.classList.remove('cb-dragging');
+      forceHideCursor();
     };
 
-    // Add mouse tracking
+    // Initial hide
+    forceHideCursor();
+
+    // Add all event listeners
     document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseover', handleAnyEvent);
+    document.addEventListener('mouseenter', handleAnyEvent);
+    document.addEventListener('mouseleave', handleAnyEvent);
+    document.addEventListener('click', handleAnyEvent);
+    document.addEventListener('focus', handleAnyEvent);
+    document.addEventListener('blur', handleAnyEvent);
+    document.addEventListener('keydown', handleAnyEvent);
+    document.addEventListener('keyup', handleAnyEvent);
+    document.addEventListener('scroll', handleAnyEvent);
+    document.addEventListener('resize', handleAnyEvent);
+    document.addEventListener('visibilitychange', handleAnyEvent);
+    document.addEventListener('pointermove', handleAnyEvent);
+    document.addEventListener('pointerenter', handleAnyEvent);
+    document.addEventListener('pointerleave', handleAnyEvent);
+    document.addEventListener('contextmenu', handleAnyEvent);
+    document.addEventListener('dragstart', handleAnyEvent);
+    document.addEventListener('dragend', handleAnyEvent);
     window.addEventListener('dragover', handleDragOver);
     window.addEventListener('dragenter', handleDragEnter);
     window.addEventListener('dragleave', clearDragState);
     window.addEventListener('drop', clearDragState);
 
+    // Ultra aggressive interval to constantly re-hide cursor
+    const cursorInterval = setInterval(forceHideCursor, 10); // Every 10ms
+
+    // Mutation observer to catch new elements
+    const observer = new MutationObserver(() => {
+      forceHideCursor();
+    });
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true, 
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleAnyEvent);
+      document.removeEventListener('mouseenter', handleAnyEvent);
+      document.removeEventListener('mouseleave', handleAnyEvent);
+      document.removeEventListener('click', handleAnyEvent);
+      document.removeEventListener('focus', handleAnyEvent);
+      document.removeEventListener('blur', handleAnyEvent);
+      document.removeEventListener('keydown', handleAnyEvent);
+      document.removeEventListener('keyup', handleAnyEvent);
+      document.removeEventListener('scroll', handleAnyEvent);
+      document.removeEventListener('resize', handleAnyEvent);
+      document.removeEventListener('visibilitychange', handleAnyEvent);
+      document.removeEventListener('pointermove', handleAnyEvent);
+      document.removeEventListener('pointerenter', handleAnyEvent);
+      document.removeEventListener('pointerleave', handleAnyEvent);
+      document.removeEventListener('contextmenu', handleAnyEvent);
+      document.removeEventListener('dragstart', handleAnyEvent);
+      document.removeEventListener('dragend', handleAnyEvent);
       window.removeEventListener('dragover', handleDragOver);
       window.removeEventListener('dragenter', handleDragEnter);
       window.removeEventListener('dragleave', clearDragState);
       window.removeEventListener('drop', clearDragState);
+      clearInterval(cursorInterval);
+      observer.disconnect();
     };
   }, []);
 

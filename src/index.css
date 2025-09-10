@@ -9,6 +9,26 @@ html, body, * {
 .cb-dragging, .cb-dragging * {
   cursor: none !important;
 }
+
+/* Ultra aggressive cursor hiding for all states and interactions */
+*, *:hover, *:focus, *:active, *:visited, *:link, *:before, *:after {
+  cursor: none !important;
+}
+
+/* Hide cursor on all form elements and interactive elements */
+input, textarea, select, button, a, [role="button"], [onclick], [tabindex], [contenteditable] {
+  cursor: none !important;
+}
+
+/* Hide cursor during drag operations */
+[draggable="true"], .dragging, .drag-over, .drop-zone {
+  cursor: none !important;
+}
+
+/* Force hide cursor on any element that might show it */
+div, span, p, h1, h2, h3, h4, h5, h6, img, svg, canvas, video, audio {
+  cursor: none !important;
+}
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {
