@@ -11,34 +11,11 @@ export default function App() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
 
-  // Force custom cursor restoration - Using data URL for reliability
+  // Simple cursor restoration - Let CSS handle most of it
   const forceCustomCursor = () => {
-    const cursorDataUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=';
-    const cursorStyle = `${cursorDataUrl} 16 16, auto`;
-    const pointerStyle = `${cursorDataUrl} 16 16, pointer`;
-    
-    // Apply to document and body
-    document.documentElement.style.cursor = cursorStyle;
-    document.body.style.cursor = cursorStyle;
-    
-    // Apply to all existing elements
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach((element: Element) => {
-      const htmlElement = element as HTMLElement;
-      if (htmlElement.tagName === 'BUTTON' || 
-          htmlElement.tagName === 'A' || 
-          htmlElement.hasAttribute('onclick') ||
-          htmlElement.getAttribute('role') === 'button' ||
-          htmlElement.classList.contains('cursor-pointer')) {
-        htmlElement.style.cursor = pointerStyle;
-      } else {
-        htmlElement.style.cursor = cursorStyle;
-      }
-    });
-    
-    // Also set CSS custom properties for global use
-    document.documentElement.style.setProperty('--custom-cursor', cursorStyle);
-    document.documentElement.style.setProperty('--custom-pointer', pointerStyle);
+    // Just ensure the CSS is applied
+    document.documentElement.style.cursor = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=) 16 16, auto';
+    document.body.style.cursor = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAeGVYSWZNTQAqAAAACAAEARoABQAAAAEAAAA+ARsABQAAAAEAAABGASgAAwAAAAEAAgAAh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACfCVbEAAAACXBIWXMAAAsTAAALEwEAmpwYAAADJklEQVRYCe2WS2gTQRjHs3m/LS01kjQaIeCh2LQEvKkUvKgnQRFRES9F8GIRRBE0Fx8XRfBQlQoeWkQ8FOsDpBYPHvRS8NhDWqFKJaFeqm0S0ib+Rgyd3cyauH2cujDsfI/5/v/5vplv12bbfDYzsJkBkwy4XK4exmmn07k3nU67TNxWrXaoIvh8vni5XP5ot9ur2GO5XK4PIqXl5eVJlf+a68TuAXzPGPV6vQmPx5NkPuZwOIbC4XDrWgLaVcGCweB0tVqdA/RepVLxlkolIc9DYGpxcXHI7XZ3qdZZ0SlLUCwWS4ClAKUS5XGIXNQ0rcL8Cvos+ttkKUdJpqyANrUmEAhsA/gFQGd5v23hqS3kjHSge04mTtZ06/IG4AgHMS/OgRGgvb09CLkBRr/BprFuN5k6CMn9YiMGu07UdJJCIMh11NrS0lJGYbZjv0Z5WmKx2OV8Pt9Kme5wbsrovuHvY2xnPgvRW5yfWUWMhio243gE0FUzT4L3MYbxEWU5Jvslk0kPtjPEGBO3SbY1Pe/s7HQT5DEAN80WUaZeyjWD33mVj7Bje4bNclNzQOAuQQaj0ajfBGQHQPtUNqEjC/eJ0Wvmb0oPgQsEGQFoZ1MLJCfKc4osXZJUNmUfkB2Mcw7YJwL94FDeYEc+5M/4iJbd8MG/C/9W+siHhs6NHLheEbLxhKAPG/nW7PgOcBAP1WTxVrZi2cFsvrCwkGMnk1yxr0YfiJ1jdMt6gA/juzUej4/Leqcs/M88FAq1FQqFPZTihHEddZ6lH4yw41eQ/AJwgrbdIc5PNpstyf6WMwD4LoKLZqMLKILz8RoF9CVEKpCYZ/46lUodZ82MDC7mljPA2jCBfxkDSvI7CHaToUGhm5iYkEwrU8sZIMRPALashNLPIDeHpk2vrZcsE+AqThMuwlDG+EvuXxn6w0a5uJ5nvYYPy3dqXOBg9dRb+XppWg9jfX/h6IgHIPA0k8noNpJIJLzY3vj9/qiK3JrqRGvlpA9DJB2JRAICFPkBsvE/QYnb8H9AucqgFE2GFnuUuocYNkiN0wcGDG4bIgZAWc3V3hCSOpDfYPfqvXmUQpsAAAAASUVORK5CYII=) 16 16, auto';
   };
 
   // Calculate scale to cover viewport completely (crop overflow, no gaps)
@@ -55,69 +32,16 @@ export default function App() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
-  // Cursor restoration effect
+  // Simple cursor restoration effect
   useEffect(() => {
     // Initial cursor setup
     forceCustomCursor();
 
-    // Restore cursor after various events that might reset it
-    const events = [
-      'mousemove',
-      'mouseenter', 
-      'mouseleave',
-      'focus',
-      'blur',
-      'click',
-      'keydown',
-      'keyup',
-      'scroll',
-      'resize',
-      'visibilitychange',
-      'pointermove',
-      'pointerenter',
-      'pointerleave',
-      'pointerdown',
-      'pointerup',
-      'contextmenu',
-      'selectstart',
-      'dragstart',
-      'dragend'
-    ];
-
-    const restoreCursor = () => {
-      // Immediate restoration
-      forceCustomCursor();
-      // Also restore after a small delay
-      setTimeout(forceCustomCursor, 5);
-    };
-
-    events.forEach(event => {
-      document.addEventListener(event, restoreCursor, true);
-      window.addEventListener(event, restoreCursor, true);
-    });
-
-    // More frequent cursor restoration as fallback
-    const cursorInterval = setInterval(forceCustomCursor, 100);
-
-    // MutationObserver to catch new elements
-    const observer = new MutationObserver(() => {
-      forceCustomCursor();
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['style', 'class']
-    });
+    // Simple interval to restore cursor
+    const cursorInterval = setInterval(forceCustomCursor, 50);
 
     return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, restoreCursor, true);
-        window.removeEventListener(event, restoreCursor, true);
-      });
       clearInterval(cursorInterval);
-      observer.disconnect();
     };
   }, []);
 
